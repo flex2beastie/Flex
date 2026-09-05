@@ -5,7 +5,7 @@ services:
     container_name: we-the-people-library
     restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "8088:3000"
     environment:
       - PORT=3000
       - NODE_ENV=production

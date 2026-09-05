@@ -57,7 +57,13 @@ docker compose up -d --build
 This builds the image (compiling `better-sqlite3` in a build stage, then
 copying into a slim runtime image), starts the container, and persists the
 database and uploaded files to `./data` and `./uploads` on the host via bind
-mounts. Visit `http://<host>:3000`.
+mounts. Visit `http://<host>:8088`.
+
+The container listens on port 3000 internally but is published on the host
+as **8088** by default (see `docker-compose.yml`) — port 3000 is a common
+default for other self-hosted apps (e.g. ConvertX), so this avoids clashing
+with anything already using it on your box. Change the left-hand side of
+the `"8088:3000"` port mapping if you'd rather use a different host port.
 
 ## Deploying on ZimaOS
 
@@ -80,10 +86,11 @@ same way as any other self-hosted CasaOS/ZimaOS app:
    reboots (`restart: unless-stopped`).
 4. **Or install via the ZimaOS/CasaOS App Store's "Install a customized app"**
    option instead of the CLI: point it at this repo's `docker-compose.yml`,
-   map port `3000`, and mount `/app/data` and `/app/uploads` to two folders
-   on your storage pool so the library and uploaded files survive container
-   updates.
-5. Open `http://<your-zimaos-ip>:3000` once the container is running.
+   map host port `8088` to container port `3000` (or another free host port
+   if 8088 is also taken), and mount `/app/data` and `/app/uploads` to two
+   folders on your storage pool so the library and uploaded files survive
+   container updates.
+5. Open `http://<your-zimaos-ip>:8088` once the container is running.
 
 To update later: pull the latest code and run `docker compose up -d --build`
 again — the bind-mounted `data/` and `uploads/` folders keep your library
