@@ -19,4 +19,15 @@ function requireAuth(req, res, next) {
   next();
 }
 
-module.exports = { attachUser, requireAuth };
+function requireAdmin(req, res, next) {
+  if (!req.user) {
+    req.session.returnTo = req.originalUrl;
+    return res.redirect('/login');
+  }
+  if (!req.user.is_admin) {
+    return res.status(403).render('403');
+  }
+  next();
+}
+
+module.exports = { attachUser, requireAuth, requireAdmin };

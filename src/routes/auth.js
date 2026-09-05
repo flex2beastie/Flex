@@ -5,8 +5,9 @@ const db = require('../db');
 const router = express.Router();
 
 const findByEmail = db.prepare('SELECT * FROM users WHERE email = ?');
+const countUsers = db.prepare('SELECT COUNT(*) AS n FROM users');
 const insertUser = db.prepare(
-  'INSERT INTO users (email, display_name, password_hash) VALUES (?, ?, ?)'
+  'INSERT INTO users (email, display_name, password_hash, is_admin) VALUES (?, ?, ?, ?)'
 );
 
 router.get('/register', (req, res) => {
@@ -36,7 +37,8 @@ router.post('/register', (req, res) => {
   }
 
   const passwordHash = bcrypt.hashSync(password, 12);
-  const info = insertUser.run(email, displayName, passwordHash);
+  const isFirstUser = countUsers.get().n === 0;
+  const info = insertUser.run(email, displayName, passwordHash, isFirstUser ? 1 : 0);
   req.session.userId = info.lastInsertRowid;
   res.redirect('/');
 });

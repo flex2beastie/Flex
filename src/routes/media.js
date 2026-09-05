@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const express = require('express');
 const multer = require('multer');
 const db = require('../db');
-const { requireAuth } = require('../middleware/auth');
+const { requireAdmin } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -102,11 +102,11 @@ router.get('/', (req, res) => {
   });
 });
 
-router.get('/upload', requireAuth, (req, res) => {
+router.get('/upload', requireAdmin, (req, res) => {
   res.render('upload', { error: null, categories: CATEGORIES, form: {} });
 });
 
-router.post('/upload', requireAuth, (req, res, next) => {
+router.post('/upload', requireAdmin, (req, res, next) => {
   upload.single('file')(req, res, (err) => {
     if (err) {
       return res.status(400).render('upload', {

@@ -38,7 +38,12 @@
     </form>
 
     <% if (items.length === 0) { %>
-      <p class="empty-state">Nothing here yet. <a href="/upload">Be the first to upload.</a></p>
+      <p class="empty-state">
+        Nothing here yet.
+        <% if (currentUser && currentUser.is_admin) { %>
+          <a href="/upload">Be the first to upload.</a>
+        <% } %>
+      </p>
     <% } else { %>
       <div class="grid">
         <% items.forEach(function(item) { %>

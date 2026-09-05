@@ -10,8 +10,11 @@ accents, bold poster-style headings, and the show's circular microphone logo.
 ## Features
 
 - **Accounts** — email/password registration and login (passwords hashed with bcrypt).
-- **Uploads** — signed-in users can upload books (PDF/EPUB/MOBI/TXT) or videos
-  (MP4/WebM/MOV/MKV) up to 2GB, tagged with a type and category.
+- **Admin-only uploads** — only the admin account can upload books
+  (PDF/EPUB/MOBI/TXT) or videos (MP4/WebM/MOV/MKV, up to 2GB), tagged with a
+  type and category. The very first account ever registered on a given
+  install is automatically made admin; everyone who registers after that can
+  browse and download but won't see the Upload link.
 - **Rights confirmation** — every upload requires the uploader to confirm they
   own the content or otherwise have the right to share it, before the file is
   accepted.
