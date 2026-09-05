@@ -1,0 +1,28 @@
+<%- include('partials/head', { title: 'Join' }) %>
+<%- include('partials/header') %>
+
+  <main class="wrap form-page form-page--narrow">
+    <h1>Join the community</h1>
+    <% if (error) { %>
+      <p class="alert"><%= error %></p>
+    <% } %>
+    <form method="POST" action="/register" class="stacked-form">
+      <label>
+        Display name
+        <input type="text" name="displayName" value="<%= displayName %>" required autofocus />
+      </label>
+      <label>
+        Email
+        <input type="email" name="email" value="<%= email %>" required />
+      </label>
+      <label>
+        Password
+        <input type="password" name="password" minlength="8" required />
+        <span class="hint">At least 8 characters.</span>
+      </label>
+      <button type="submit" class="cta cta--large">Create account</button>
+    </form>
+    <p class="form-footnote">Already have an account? <a href="/login">Log in</a></p>
+  </main>
+
+<%- include('partials/footer') %>

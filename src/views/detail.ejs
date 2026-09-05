@@ -1,0 +1,26 @@
+<%- include('partials/head', { title: item.title }) %>
+<%- include('partials/header') %>
+
+  <main class="wrap detail">
+    <a href="/" class="back-link">&larr; Back to library</a>
+    <span class="card__type card__type--<%= item.media_type %>"><%= item.media_type %></span>
+    <h1 class="detail__title"><%= item.title %></h1>
+    <% if (item.author_or_creator) { %>
+      <p class="detail__author">by <%= item.author_or_creator %></p>
+    <% } %>
+    <p class="detail__category"><%= item.category %></p>
+
+    <% if (item.description) { %>
+      <p class="detail__description"><%= item.description %></p>
+    <% } %>
+
+    <div class="detail__stats">
+      <span><strong><%= item.download_count %></strong> download<%= item.download_count === 1 ? '' : 's' %></span>
+      <span>Uploaded by <strong><%= item.uploader_name %></strong></span>
+      <span><%= (item.file_size / (1024*1024)).toFixed(1) %> MB</span>
+    </div>
+
+    <a href="/media/<%= item.id %>/download" class="cta cta--large">Download</a>
+  </main>
+
+<%- include('partials/footer') %>

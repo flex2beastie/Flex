@@ -1,0 +1,24 @@
+  <header class="site-header">
+    <div class="wrap site-header__row">
+      <a href="/" class="brand">
+        <img src="/img/logo.png" alt="We The People Podcast" class="brand__logo" />
+        <span class="brand__text">
+          <span class="brand__kicker">We The People</span>
+          <span class="brand__title">LIBRARY</span>
+        </span>
+      </a>
+      <nav class="site-nav">
+        <a href="/">Browse</a>
+        <% if (currentUser) { %>
+          <a href="/upload">Upload</a>
+          <span class="site-nav__user">Signed in as <strong><%= currentUser.display_name %></strong></span>
+          <form action="/logout" method="POST" class="inline-form">
+            <button type="submit" class="link-button">Log out</button>
+          </form>
+        <% } else { %>
+          <a href="/login">Log in</a>
+          <a href="/register" class="cta">Join</a>
+        <% } %>
+      </nav>
+    </div>
+  </header>

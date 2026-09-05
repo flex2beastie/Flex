@@ -1,0 +1,20 @@
+{
+  "name": "we-the-people-library",
+  "version": "1.0.0",
+  "description": "We The People — a branded media library for downloading books and videos, with accounts, uploads, and download tracking.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "express-session": "^1.18.0",
+    "multer": "^2.0.1",
+    "nanoid": "^3.3.7"
+  }
+}
